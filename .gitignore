@@ -1,0 +1,6 @@
+# Project exclude paths
+/.gradle/
+/greeting-plugin/build/
+/greeting-plugin/build/classes/java/functionalTest/
+/greeting-plugin/build/classes/java/main/
+/greeting-plugin/build/classes/java/test/
