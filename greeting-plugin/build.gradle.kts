@@ -1,8 +1,11 @@
 plugins {
-    // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     `java-gradle-plugin`
+    this.id("com.gradle.plugin-publish") version "1.2.1"
+    signing
 }
 
+group = "com.cheroliv"
+version = "0.0.1"
 repositories.mavenCentral()
 
 dependencies.testImplementation("junit:junit:4.13")
@@ -13,8 +16,14 @@ gradlePlugin {
     val greeting by plugins.creating {
         id = "com.cheroliv.plugin.greeting"
         implementationClass = "com.cheroliv.plugin.GreetingPlugin"
+        displayName = "com.cheroliv.plugin.GreetingPlugin"
+        description = "Mon premier plugin gradle en Kotlin."
+        tags = listOf("greetings")
     }
+    website = "https://cheroliv.com"
+    vcsUrl = "https://github.com/cheroliv/gradle-plugin-in-kotlin.git"
 }
+
 
 // Add a source set and a task for a functional test suite
 val functionalTest by sourceSets.creating
