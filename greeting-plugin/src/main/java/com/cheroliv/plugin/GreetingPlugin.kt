@@ -1,12 +1,17 @@
-package com.cheroliv.plugin;
+package com.cheroliv.plugin
 
-import org.gradle.api.Plugin;
-import org.gradle.api.Project;
+import org.gradle.api.Action
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.Task
 
-public class GreetingPlugin implements Plugin<Project> {
-    public void apply(Project project) {
-        project.getTasks().register("greet", task -> {
-            task.doLast(s -> System.out.println("Hello from plugin 'com.cheroliv.plugin.greeting'"));
-        });
+class GreetingPlugin : Plugin<Project> {
+    override fun apply(project: Project) {
+        project.tasks.register(
+            "greet",
+            Action { task: Task? ->
+                task!!.doLast(Action { s: Task? -> println("Hello from plugin 'com.cheroliv.plugin.greeting'") })
+            }
+        )
     }
 }
