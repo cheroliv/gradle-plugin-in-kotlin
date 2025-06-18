@@ -1,12 +1,13 @@
 plugins {
+    signing
     `java-gradle-plugin`
     this.id("com.gradle.plugin-publish") version "1.2.1"
-    signing
 }
+
+repositories.mavenCentral()
 
 group = "com.cheroliv"
 version = "0.0.1"
-repositories.mavenCentral()
 
 dependencies.testImplementation("junit:junit:4.13")
 
