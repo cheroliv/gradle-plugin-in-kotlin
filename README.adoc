@@ -1,0 +1,4 @@
+= My Gradle Plugin Sample in kotlin and kotlin DSLs
+
+This sample shows how to build a Gradle plugin in the Java language.
+It uses the `kotlin-dsl` plugin to write the build script in Kotlin.
