@@ -15,7 +15,7 @@ dependencies {
     testImplementation("junit:junit:4.13")
 }
 
-//kotlin.jvmToolchain(24)
+kotlin.jvmToolchain(21)
 
 val functionalTest: SourceSet by sourceSets.creating
 val functionalTestTask = tasks.register<Test>("functionalTest") {
@@ -45,6 +45,7 @@ gradlePlugin {
 
 publishing {
     publications {
+
         withType<MavenPublication> {
             // Nous allons nous fier à la signature automatique,
             // donc pas d'action spécifique ici liée à la signature.
@@ -56,6 +57,7 @@ signing {
     // Nous nous lions aux publications connues automatiquement par le plugin signing
     // et nous assurons que la commande gpg est utilisée.
     useGpgCmd()
+
 }
 
 tasks.check { dependsOn(functionalTestTask) }
