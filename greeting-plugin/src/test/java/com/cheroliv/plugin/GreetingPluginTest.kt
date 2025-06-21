@@ -1,19 +1,17 @@
-package com.cheroliv.plugin;
+package com.cheroliv.plugin
 
-import org.gradle.testfixtures.ProjectBuilder;
-import org.gradle.api.Project;
-import org.junit.Test;
-import static org.junit.Assert.assertNotNull;
+import org.gradle.testfixtures.ProjectBuilder
+import org.junit.Assert.assertNotNull
+import org.junit.Test
 
-
-public class GreetingPluginTest {
+class GreetingPluginTest {
     @Test
-    public void pluginRegistersATask() {
+    fun pluginRegistersATask() {
         // Create a test project and apply the plugin
-        Project project = ProjectBuilder.builder().build();
-        project.getPlugins().apply("com.cheroliv.plugin.greeting");
+        val project = ProjectBuilder.builder().build()
+        project.plugins.apply("com.cheroliv.plugin.greeting")
 
         // Verify the result
-        assertNotNull(project.getTasks().findByName("greet"));
+        assertNotNull(project.tasks.findByName("greet"))
     }
 }
