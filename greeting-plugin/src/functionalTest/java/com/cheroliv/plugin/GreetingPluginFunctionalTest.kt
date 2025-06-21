@@ -1,43 +1,40 @@
-package com.cheroliv.plugin;
+package com.cheroliv.plugin
 
-import org.gradle.testkit.runner.BuildResult;
-import org.gradle.testkit.runner.GradleRunner;
-import org.junit.Test;
+import org.gradle.testkit.runner.GradleRunner.create
+import org.junit.Assert.assertTrue
+import org.junit.Test
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
+import java.nio.file.Files.createDirectories
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-
-import static org.junit.Assert.assertTrue;
-
-
-public class GreetingPluginFunctionalTest {
+class GreetingPluginFunctionalTest {
     @Test
-    public void canRunTask() throws IOException {
+    @Throws(IOException::class)
+    fun canRunTask() {
         // Setup the test build
-        File projectDir = new File("build/functionalTest");
-        Files.createDirectories(projectDir.toPath());
-        writeString(new File(projectDir, "settings.gradle"), "");
-        writeString(new File(projectDir, "build.gradle"),
-                "plugins {" + "  id('com.cheroliv.plugin.greeting')" + "}");
+        val projectDir = File("build/functionalTest")
+        createDirectories(projectDir.toPath())
+        writeString(File(projectDir, "settings.gradle"), "")
+        writeString(
+            File(projectDir, "build.gradle"),
+            "plugins {" + "  id('com.cheroliv.plugin.greeting')" + "}"
+        )
 
         // Run the build
-        BuildResult result = GradleRunner.create()
-                .forwardOutput()
-                .withPluginClasspath()
-                .withArguments("greet")
-                .withProjectDir(projectDir)
-                .build();
+        val result = create()
+            .forwardOutput()
+            .withPluginClasspath()
+            .withArguments("greet")
+            .withProjectDir(projectDir)
+            .build()
 
         // Verify the result
-        assertTrue(result.getOutput().contains("Hello from plugin 'com.cheroliv.plugin.greeting'"));
+        assertTrue(result.output.contains("Hello from plugin 'com.cheroliv.plugin.greeting'"))
     }
 
-    private void writeString(File file, String string) throws IOException {
-        try (Writer writer = new FileWriter(file)) {
-            writer.write(string);
-        }
+    @Throws(IOException::class)
+    private fun writeString(file: File, string: String) {
+        FileWriter(file).use { writer -> writer.write(string) }
     }
 }
