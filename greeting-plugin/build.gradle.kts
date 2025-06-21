@@ -1,8 +1,8 @@
 plugins {
     signing
     `java-gradle-plugin`
-    this.id("com.gradle.plugin-publish") version "1.2.1"
-    kotlin("jvm")
+    this.alias(libs.plugins.publish)
+    this.alias(libs.plugins.kotlin.jvm)
 }
 
 group = "com.cheroliv"
